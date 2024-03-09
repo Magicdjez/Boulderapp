@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginForm from './LoginForm';
 import Mapview from './Mapview';
+import Profile from './Profile'; 
 import Blocform from './Blocform';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // Assurez-vous d'importer Ionicons depuis react-native-vector-icons
 
@@ -24,6 +25,8 @@ const App = () => {
               iconName = focused ? 'add-circle' : 'add-circle-outline';
             } else if (route.name === 'Login') {
               iconName = focused ? 'log-in' : 'log-in-outline';
+            }else if (route.name === 'Profile') {
+              iconName = focused ? 'person' : 'person-outline';
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -32,6 +35,7 @@ const App = () => {
         <Tab.Screen name="Map" component={Mapview} />
         <Tab.Screen name="Plus" component={Blocform} />
         <Tab.Screen name="Login" component={LoginForm} />
+        <Tab.Screen name="Profile" component={Profile} /> 
       </Tab.Navigator>
     </NavigationContainer>
   );
