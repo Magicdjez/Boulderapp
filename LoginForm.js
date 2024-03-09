@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  Button,
+} from 'react-native';
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -25,6 +35,10 @@ const LoginForm = () => {
   };
 
   return (
+       <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
     <View style={styles.container}>
       {!showSignupForm && !showForgotPasswordForm ? (
         <View>
@@ -51,13 +65,12 @@ const LoginForm = () => {
           <TouchableOpacity onPress={handleForgotPassword}>
             <Text style={styles.link}>Mot de passe oublié</Text>
           </TouchableOpacity>
-          <Button
-            title="Se connecter"
-            onPress={handleLogin}
-          />
-          <Button onPress={handleSignup}
-            title="Créer un compte"
-          />
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Se connecter</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleSignup}>
+          <Text style={styles.buttonText}>Créer un compte</Text>
+        </TouchableOpacity>
           
         </View>
       ) : showSignupForm ? (
@@ -87,13 +100,13 @@ const LoginForm = () => {
             style={styles.input}
             placeholder="Entrez une adresse email"
           />
-          <Button
-            title="S'inscrire"
-            onPress={() => {
+  
+           <TouchableOpacity style={styles.button} onPress={() => {
               // Ajouter ici la logique d'inscription
               setShowSignupForm(false); // Masquer le formulaire d'inscription après l'inscription réussie
-            }}
-          />
+            }}>
+          <Text style={styles.buttonText}>S'inscrire</Text>
+        </TouchableOpacity>
           <TouchableOpacity onPress={() => setShowSignupForm(false)}>
             <Text style={styles.link}>Annuler</Text>
           </TouchableOpacity>
@@ -110,19 +123,20 @@ const LoginForm = () => {
             style={styles.input}
             placeholder="Entrez votre adresse email"
           />
-          <Button
-            title="Envoyer"
-            onPress={() => {
+      
+          <TouchableOpacity style={styles.button}  onPress={() => {
               // Ajouter ici la logique pour envoyer un email de réinitialisation du mot de passe
-              setShowForgotPasswordForm(false); // Masquer le formulaire de réinitialisation du mot de passe après l'envoi réussi
-            }}
-          />
+              setShowForgotPasswordForm(false); // 
+            }}>
+          <Text style={styles.buttonText}>S'inscrire</Text>
+        </TouchableOpacity>
           <TouchableOpacity onPress={() => setShowForgotPasswordForm(false)}>
             <Text style={styles.link}>Annuler</Text>
           </TouchableOpacity>
         </View>
       )}
     </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -155,6 +169,63 @@ const styles = StyleSheet.create({
     color: 'blue',
     textDecorationLine: 'underline',
     marginTop: 10,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#f7f7f7',
+    justifyContent: 'center',
+  },
+  form: {
+    marginHorizontal: 30,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 0 },
+    elevation: 10,
+  },
+  image: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 8,
+  },
+  input: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 25,
+    paddingHorizontal: 15,
+    marginBottom: 15,
+    fontSize: 16,
+  },
+  link: {
+    color: '#007bff',
+    textDecorationLine: 'underline',
+    marginTop: 10,
+    alignSelf: 'flex-end',
+  },
+  button: {
+    backgroundColor: '#007bff', // Utilisez votre couleur principale ici
+    padding: 15,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%', // pour que le TouchableOpacity s'étende sur toute la largeur
+    marginBottom: 10,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
 

@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
+    "@invertase/react-native-apple-authentication": "^2.3.0",
     "@react-native-clipboard/clipboard": "^1.13.2",
+    "@react-native-google-signin/google-signin": "^11.0.0",
     "@react-native-picker/picker": "^2.6.1",
     "@react-navigation/bottom-tabs": "^6.5.16",
     "@react-navigation/native": "^6.1.14",
